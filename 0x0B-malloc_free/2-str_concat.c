@@ -1,55 +1,39 @@
 #include "main.h"
-
+#include <stdlib.h>
 /**
- * _strlen - length of a string
- * @s: input char
- * Return: length of a string
+ * str_concat - concat 2 string
+ * @s1:string1
+ * @s2:string2
+ * Return:char
  */
-
-int _strlen(char *s)
-{
-	int l = 0;
-
-	while (*s != '\0')
-	{
-		s++;
-		l++;
-	}
-	return (l);
-}
-
-/**
-* str_concat - Concat 2 strings.
-* @s1: string
-* @s2: string
-* Return: char
-*/
 
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int l1, l2;
-	char *conc, *tmp;
+	unsigned int i, j, k, l;
+	char *s;
 
-	if (!s1)
-		s1 = "";
+	if (s1 == NULL)
+		i = 0;
 	else
-		l1 = _strlen(s1);
-
-	if (!s2)
-		s2 = "";
+	{
+		for (i = 0; s1[i]; i++)
+			;
+	}
+	if (s2 == NULL)
+		j = 0;
 	else
-		l2 = _strlen(s2);
-
-	conc = malloc(l1 + l2 + 1);
-	if (!conc)
-		return (0);
-
-	tmp = conc;
-	while (*s1)
-		*tmp++ = *s1++;
-
-	while ((*tmp++ = *s2++))
-		;
-
-	return (conc);
+	{
+		for (j = 0; s2[j]; j++)
+			;
+	}
+	k = i + j + 1;
+	s = malloc(k * sizeof(char));
+	if (s == NULL)
+		return (NULL);
+	for (l = 0; l < i; l++)
+		s[l] = s1[l];
+	for (l = 0; l < j; l++)
+		s[l + i] = s2[l];
+	s[i + j] = '\0';
+	return (s);
 }
